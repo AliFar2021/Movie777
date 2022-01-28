@@ -42,6 +42,7 @@ def index():
             send_mess(chat_id, 'if you want see your favorite list write ( 4 )')
             send_mess(chat_id, 'if you want get information about movies write ( 5 )')
 
+        
         if 1 in text:
             movies = read_json_file()
             user = messs['message']['from']['username']
@@ -51,7 +52,7 @@ def index():
             movies[user].append(new_user)
             write_json_file(movies)
             send_mess(chat_id, 'your movie is added to your list')
-
+        
         elif 2 in text:
             favorite_movies = read_json_file()
             user = messs['message']['from']['username']
@@ -61,7 +62,7 @@ def index():
             favorite_movies[user].append(new_user)
             write_json_file(favorite_movies)
             send_mess(chat_id, 'your movie is added to your favorite list')
-
+        
         elif text == 3:
             movies = read_json_file()
             user = messs['message']['from']['username']
@@ -78,8 +79,8 @@ def index():
                 send_mess(chat_id, 'you have no movie')
             else:
                 for i in favorite_movies[user]:
-                    send_mess(chat_id, i)
-
+                    send_mess(chat_id, i )
+        
         elif text == 5:
             movie_list = ['Hotwired in Suburbia, genre: Exciting, Production Year: 2020, Score: 4, Actors: Zoe_Belkin Samantha_Helt Tyler_Hynes',
                           'The Fosters S01, genre: Romantic, Production Year: 2013, Score: 7.9, Actors: Teri_Polo, Sherri_Saum, Hayden_Byerly',
@@ -93,11 +94,11 @@ def index():
 
         else:
             send_mess(chat_id, 'try again')
-
-        return Response('ok', status=200)
-
+    
     else:
         return '<h1>My_Bot</h1>'
+    
+    return Response('ok', status=200)
 
 def write_json_file(dade, name="movielist.json"):
     with open(name, 'w') as goal:
@@ -114,4 +115,4 @@ def read_json_file(name="movielist.json"):
    # send_mess(get_chatid(lupdate),'hello')
 
 write_json_file({})
-application.run(host="0.0.0.0", port=int(os.environ('PORT', 5000)))
+application.run(host="0.0.0.0", port=int(os.environ.get('PORT', 5000)))
